@@ -13,3 +13,4 @@ SudIP tool is using to scan and extract open ports
 
 [+]:> INPUT
  
+[+]:> LOG.TXT
