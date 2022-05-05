@@ -135,30 +135,28 @@ if $options[:ip].split(".")[0].to_i > 255 or $options[:ip].split(".")[1].to_i > 
 end
 
 TIMEOUT = 2
-def ip(port)
-  socket = Socket.new(AF_INET,SOCK_STREAM,0)
-  addr = Socket.sockaddr_in(port,$options[:ip])
-  begin
-    socket.connect_nonblock(addr)
-  rescue Errno::EINPROGRESS
-  rescue Errno::EADDRNOTAVAIL
-  end
-  _,check,_ = IO.select(nil,[socket],nil,TIMEOUT)
-  if check
-    $file.write("#{$options[:ip].to_s.chomp.strip}:#{port.to_s.chomp}\n")
-    begin
-      puts "#{$options[:ip].to_s.cyan}#{":".colors}#{">".colors} #{port.to_s.green} #{"O".colors}#{"P".colors}#{"E".colors}#{"N".colors}"
-
-  end
-  end
-  end
 $PORTS = []
 for xport in ("#{$options[:ports].chomp.strip.split("-")[0]}".to_i.."#{$options[:ports].chomp.strip.split("-")[1]}".to_i) do
   $PORTS.push(xport)
 end
 thread = []
 begin
-  $timer = "#{(Benchmark.measure { $PORTS.each { |set| thread << Thread.new { ip(set) } } })}".split("( ")[1].gsub(")","").chomp.strip
+  $timer = "#{(Benchmark.measure { $PORTS.each { |set| thread << Thread.new {
+    socket = Socket.new(AF_INET,SOCK_STREAM,0)
+    addr = Socket.sockaddr_in(set,$options[:ip])
+    begin
+      socket.connect_nonblock(addr)
+    rescue Errno::EINPROGRESS, Errno::EADDRNOTAVAIL
+    end
+    _,check,_ = IO.select(nil,[socket],nil,TIMEOUT)
+    if check
+      $file.write("#{$options[:ip].to_s.chomp.strip}:#{set.to_s.chomp}\n")
+      begin
+        puts "#{$options[:ip].to_s.cyan}#{":".colors}#{">".colors} #{set.to_s.green} #{"O".colors}#{"P".colors}#{"E".colors}#{"N".colors}"
+
+      end
+    end
+  } } })}".split("( ")[1].gsub(")","").chomp.strip
   print "#{"F".colors}#{"I".colors}#{"N".colors}#{"I".colors}#{"S".colors}#{"H".colors} #{":".colors}#{">".colors} #{$timer}#{"/".colors}#{"s".colors}"
 rescue Exception
   exit(0)
