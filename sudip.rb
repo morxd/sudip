@@ -74,7 +74,7 @@ OptionParser.new do |opt|
     puts opt.banner = "#{"U".colors}#{"S".colors}#{"I".colors}#{"N".colors}#{"G".colors} #{":".colors} #{".".colors}#{"/".colors}#{"S".colors}#{"u".colors}#{"d".colors}#{"I".colors}#{"P".colors} #{"-".colors}#{"-".colors}#{"i".colors}#{"p".colors} #{"0".colors}#{".".colors}#{"0".colors}#{".".colors}#{"0".colors}#{".".colors}#{"0".colors} #{"-".colors}#{"-".colors}#{"p".colors}#{"o".colors}#{"r".colors}#{"t".colors}#{"s".colors} #{$n1[rand($n1.length)].to_s.colors}#{"-".colors}#{$n2[rand($n2.length)].to_s.colors}"
     puts "#{"-".colors}#{"i".colors}#{",".colors}#{"-".colors}#{"-".colors}#{"i".colors}#{"p".colors} #{":".colors}#{">".colors} #{"I".colors}#{"P".colors} #{"A".colors}#{"D".colors}#{"D".colors}#{"R".colors}#{"E".colors}#{"S".colors}#{"S".colors} "
     puts "#{"-".colors}#{"p".colors}#{",".colors}#{"-".colors}#{"-".colors}#{"p".colors}#{"o".colors}#{"r".colors}#{"t".colors}#{"s".colors} #{":".colors}#{">".colors} #{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors}"
-    print "#{"-".colors}#{"a".colors},#{"-".colors}#{"-".colors}#{"a".colors}#{"b".colors}#{"o".colors}#{"u".colors}#{"t".colors} #{":".colors}#{">".colors} #{"A".colors}#{"B".colors}#{"O".colors}#{"U".colors}#{"T".colors} #{"M".colors}#{"E".colors}"
+    puts "#{"-".colors}#{"a".colors},#{"-".colors}#{"-".colors}#{"a".colors}#{"b".colors}#{"o".colors}#{"u".colors}#{"t".colors} #{":".colors}#{">".colors} #{"A".colors}#{"B".colors}#{"O".colors}#{"U".colors}#{"T".colors} #{"M".colors}#{"E".colors}"
     exit(0)
   end
 
@@ -83,7 +83,7 @@ OptionParser.new do |opt|
     exit(0)
   end
   opt.on_tail("--version","-v") do
-    print "#{$version}"
+    puts "#{$version}"
     exit(0)
   end
   opt.on("--ip YOUR ADDRESS","-i"){|i| $options[:ip] = i}
@@ -103,7 +103,7 @@ rescue OptionParser::InvalidOption
   puts "#{"U".colors}#{"S".colors}#{"I".colors}#{"N".colors}#{"G".colors} #{":".colors} #{".".colors}#{"/".colors}#{"S".colors}#{"u".colors}#{"d".colors}#{"I".colors}#{"P".colors} #{"-".colors}#{"-".colors}#{"i".colors}#{"p".colors} #{"0".colors}#{".".colors}#{"0".colors}#{".".colors}#{"0".colors}#{".".colors}#{"0".colors} #{"-".colors}#{"-".colors}#{"p".colors}#{"o".colors}#{"r".colors}#{"t".colors}#{"s".colors} #{$n1[rand($n1.length)].to_s.colors}#{"-".colors}#{$n2[rand($n2.length)].to_s.colors}"
   puts "#{"-".colors}#{"i".colors}#{",".colors}#{"-".colors}#{"-".colors}#{"i".colors}#{"p".colors} #{":".colors}#{">".colors} #{"I".colors}#{"P".colors} #{"A".colors}#{"D".colors}#{"D".colors}#{"R".colors}#{"E".colors}#{"S".colors}#{"S".colors} "
   puts "#{"-".colors}#{"p".colors}#{",".colors}#{"-".colors}#{"-".colors}#{"p".colors}#{"o".colors}#{"r".colors}#{"t".colors}#{"s".colors} #{":".colors}#{">".colors} #{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors}"
-  print "#{"-".colors}#{"a".colors},#{"-".colors}#{"-".colors}#{"a".colors}#{"b".colors}#{"o".colors}#{"u".colors}#{"t".colors} #{":".colors}#{">".colors} #{"A".colors}#{"B".colors}#{"O".colors}#{"U".colors}#{"T".colors} #{"M".colors}#{"E".colors}"
+  puts "#{"-".colors}#{"a".colors},#{"-".colors}#{"-".colors}#{"a".colors}#{"b".colors}#{"o".colors}#{"u".colors}#{"t".colors} #{":".colors}#{">".colors} #{"A".colors}#{"B".colors}#{"O".colors}#{"U".colors}#{"T".colors} #{"M".colors}#{"E".colors}"
   exit(0)
   end
 
@@ -111,26 +111,26 @@ def is_number?(obj)
   obj.to_s == obj.to_i.to_s
 end
 if $options[:ip].count(".").to_i != 3 then
-  print "#{"I".colors}#{"P".colors} #{"I".colors}#{"n".colors}#{"p".colors}#{"u".colors}#{"t".colors} #{"E".colors}#{"r".colors}#{"r".colors}#{"o".colors}#{"r".colors} #{$options[:ip].red}"
+  puts "#{"I".colors}#{"P".colors} #{"I".colors}#{"n".colors}#{"p".colors}#{"u".colors}#{"t".colors} #{"E".colors}#{"r".colors}#{"r".colors}#{"o".colors}#{"r".colors} #{$options[:ip].red}"
   exit(0)
 end
 if $options[:ports].count("-").to_i != 1 then
-  print "#{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors} #{"I".colors}#{"n".colors}#{"p".colors}#{"u".colors}#{"t".colors} #{"E".colors}#{"r".colors}#{"r".colors}#{"o".colors}#{"r".colors} #{$options[:ports].red}"
+  puts "#{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors} #{"I".colors}#{"n".colors}#{"p".colors}#{"u".colors}#{"t".colors} #{"E".colors}#{"r".colors}#{"r".colors}#{"o".colors}#{"r".colors} #{$options[:ports].red}"
   exit(0)
 end
 if is_number?("#{$options[:ip].split(".")[0].chomp.strip}") and is_number?("#{$options[:ip].split(".")[1].chomp.strip}") and is_number?("#{$options[:ip].split(".")[2].chomp.strip}") and is_number?("#{$options[:ip].split(".")[3].chomp.strip}") == true then
 else
-  print "#{"I".colors}#{"P".colors} #{"c".colors}#{"o".colors}#{"n".colors}#{"s".colors}#{"i".colors}#{"s".colors}#{"t".colors}#{"s".colors} #{"o".colors}#{"f".colors} #{"i".colors}#{"n".colors}#{"t".colors}#{"e".colors}#{"g".colors}#{"e".colors}#{"r".colors}#{"s".colors} #{":".colors}#{">".colors} #{$options[:ip].red}"
+  puts "#{"I".colors}#{"P".colors} #{"c".colors}#{"o".colors}#{"n".colors}#{"s".colors}#{"i".colors}#{"s".colors}#{"t".colors}#{"s".colors} #{"o".colors}#{"f".colors} #{"i".colors}#{"n".colors}#{"t".colors}#{"e".colors}#{"g".colors}#{"e".colors}#{"r".colors}#{"s".colors} #{":".colors}#{">".colors} #{$options[:ip].red}"
   exit(0)
 end
 if is_number?("#{$options[:ports].split("-")[0]}") and is_number?("#{$options[:ports].split("-")[1]}") == true then
 else
-  print "#{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors} #{"c".colors}#{"o".colors}#{"n".colors}#{"s".colors}#{"i".colors}#{"s".colors}#{"t".colors}#{"s".colors} #{"o".colors}#{"f".colors} #{"i".colors}#{"n".colors}#{"t".colors}#{"e".colors}#{"g".colors}#{"e".colors}#{"r".colors}#{"s".colors} #{":".colors}#{">".colors} #{$options[:ports].red}"
+  puts "#{"P".colors}#{"O".colors}#{"R".colors}#{"T".colors}#{"S".colors} #{"c".colors}#{"o".colors}#{"n".colors}#{"s".colors}#{"i".colors}#{"s".colors}#{"t".colors}#{"s".colors} #{"o".colors}#{"f".colors} #{"i".colors}#{"n".colors}#{"t".colors}#{"e".colors}#{"g".colors}#{"e".colors}#{"r".colors}#{"s".colors} #{":".colors}#{">".colors} #{$options[:ports].red}"
   exit(0)
 end
 
 if $options[:ip].split(".")[0].to_i > 255 or $options[:ip].split(".")[1].to_i > 255 or $options[:ip].split(".")[2].to_i > 255 or $options[:ip].split(".")[3].to_i > 255 then
-  print "#{"W".colors}#{"r".colors}#{"o".colors}#{"n".colors}#{"g".colors} #{"I".colors}#{"P".colors} #{":".colors}#{">".colors} #{$options[:ip].red}"
+  puts "#{"W".colors}#{"r".colors}#{"o".colors}#{"n".colors}#{"g".colors} #{"I".colors}#{"P".colors} #{":".colors}#{">".colors} #{$options[:ip].red}"
   exit(0)
 end
 
@@ -146,7 +146,7 @@ begin
     addr = Socket.sockaddr_in(set,$options[:ip])
     begin
       socket.connect_nonblock(addr)
-    rescue Errno::EINPROGRESS, Errno::EADDRNOTAVAIL
+    rescue Errno::EINPROGRESS, Errno::EADDRNOTAVAIL,Errno::EMFILE
     end
     _,check,_ = IO.select(nil,[socket],nil,TIMEOUT)
     if check
@@ -155,9 +155,10 @@ begin
         puts "#{$options[:ip].to_s.cyan}#{":".colors}#{">".colors} #{set.to_s.green} #{"O".colors}#{"P".colors}#{"E".colors}#{"N".colors}"
 
       end
+
     end
   } } })}".split("( ")[1].gsub(")","").chomp.strip
-  print "#{"F".colors}#{"I".colors}#{"N".colors}#{"I".colors}#{"S".colors}#{"H".colors} #{":".colors}#{">".colors} #{$timer}#{"/".colors}#{"s".colors}"
+    puts "#{"F".colors}#{"I".colors}#{"N".colors}#{"I".colors}#{"S".colors}#{"H".colors} #{":".colors}#{">".colors} #{$timer}#{"/".colors}#{"s".colors}"
 rescue Exception
   exit(0)
 end
