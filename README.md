@@ -1,7 +1,7 @@
-# sudip
+# SudIP
 :> IP Scanner
 
-SudIP tool is using to scan and extract open ports
+>>>>> SudIP tool is using to scan and extract open ports
 
 [+]:> SPEEDER
 
